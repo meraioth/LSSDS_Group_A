@@ -48,8 +48,8 @@ for index in xrange(len(files)):
         data = np.array([data[:,1], data[:,0], data[:,2]]) #Following the syntax from the FATS Documentation (http://isadoranun.github.io/tsfeat/FeaturesDocumentation.html)
 
         #FATS extracts features in this step
-        #features = FATS.FeatureSpace(Data['time','magnitude','error'])
-	features = FATS.FeatureSpace(featureList=['Mean'], Data=['time','magnitude', 'error']) #Testing two features
+        features = FATS.FeatureSpace(Data = ['time','magnitude','error'], excludeList=['Color', 'Eta_color', 'Q31_color', 'StentsonJ', 'StentsonL']) #Excluding these because they require mag2
+	#features = FATS.FeatureSpace(featureList=['Mean'], Data=['time','magnitude', 'error']) #Testing two features
         result = features.calculateFeature(data)
 
         #This step is required to include the star ID in the dictionary
@@ -64,10 +64,10 @@ for index in xrange(len(files)):
 #		sys.stdout.write("\r%d%%" % out)
 #		sys.stdout.flush()
 
-#    t1 = time.time()
+#t1 = time.time()
 
-#    totaltime = t1 - t0
-#    print(totaltime)
+#totaltime = t1 - t0
+#print(totaltime)
     
 
 #Convert the dictionary to pandas dataframe
@@ -78,4 +78,4 @@ outputfilename = folder + '_output.txt'
 dfresult.to_csv(outputfilename, sep=' ', index = False)
 
 #sys.stdout.write("\r%d%%" % 100)
-print("Analysis completed.")
+#print("Analysis completed.")
