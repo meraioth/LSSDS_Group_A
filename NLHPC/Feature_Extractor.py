@@ -51,7 +51,7 @@ for index in xrange(len(files)):
         data = np.array([data[:,1], data[:,0], data[:,2]]) #Following the syntax from the FATS Documentation (http://isadoranun.github.io/tsfeat/FeaturesDocumentation.html)
 
         #FATS extracts features in this step
-        features = FATS.FeatureSpace(featureList=['Mean','Std'], Data=['time','magnitude', 'error'])
+        features = FATS.FeatureSpace(Data=['time','magnitude', 'error'])
         result = features.calculateFeature(data)
 
         #This step is required to include the star ID in the dictionary
