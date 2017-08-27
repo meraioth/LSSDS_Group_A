@@ -25,10 +25,6 @@ import FATS #Copy the lomb.py, FeatureFunctionLib.py and Feature.py from the git
 #Needed for passing arguments to Python
 import sys
 
-#To remove the FATS warnings
-import warnings
-warnings.filterwarnings("ignore")
-
 #Read in folder name from terminal
 folder = sys.argv[1]
 
@@ -37,13 +33,11 @@ import glob
 
 
 path = folder + "/*.dat"
-print(path)
 resultlist = [] #For the output from FATS
 
 #t0 = time.time() #Test time start
 
 files = glob.glob(path)
-print(files)
    
 for index in xrange(len(files)):
     #Read files
@@ -54,8 +48,8 @@ for index in xrange(len(files)):
         data = np.array([data[:,1], data[:,0], data[:,2]]) #Following the syntax from the FATS Documentation (http://isadoranun.github.io/tsfeat/FeaturesDocumentation.html)
 
         #FATS extracts features in this step
-#        features = FATS.FeatureSpace(Data['time','magnitude','error'])
-	features = FATS.FeatureSpace(featurelist=['Mean', 'Std'], Data=['time','magnitude', 'error']) #Testing two features
+        #features = FATS.FeatureSpace(Data['time','magnitude','error'])
+	features = FATS.FeatureSpace(featureList=['Mean'], Data=['time','magnitude', 'error']) #Testing two features
         result = features.calculateFeature(data)
 
         #This step is required to include the star ID in the dictionary
